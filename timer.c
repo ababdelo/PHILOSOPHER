@@ -6,7 +6,7 @@
 /*   By: ababdelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:51:13 by ababdelo          #+#    #+#             */
-/*   Updated: 2023/06/26 14:42:22 by ababdelo         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:42:18 by ababdelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_usleep(int times)
 	while (get_time() - start_time < times)
 		usleep(100);
 }
-
 
 int	time_to_die(t_philo *philo)
 {
