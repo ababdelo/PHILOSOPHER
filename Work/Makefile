@@ -6,7 +6,7 @@
 #    By: ababdelo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/25 13:58:09 by ababdelo          #+#    #+#              #
-#    Updated: 2023/06/26 15:04:21 by ababdelo         ###   ########.fr        #
+#    Updated: 2023/08/08 17:16:25 by ababdelo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ GREY   = \033[0;90m
 WHITE  = \033[0m
 #=============================================================#
 
-#========================variables============================#
+# ========================variables============================ #
 PRGM = philo
 
 MAKE_MSG = --->> Mandatory part has been compiled successfully
@@ -30,6 +30,8 @@ MAKE_MSG = --->> Mandatory part has been compiled successfully
 CLN_MSG = --->> ' .o ' files has been removed successfully
 
 FCLN_MSG = --->> executable file ' $(PRGM) ' has been removed successfully
+
+ASAN_MSG = --->> Compiled Program with AddressSanitizer
 
 CC = cc
 
@@ -42,24 +44,28 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = philo.c init.c utils.c timer.c checker.c
 
 OBJS = $(SRCS:.c=.o)
-#=============================================================#
+# ============================================================= #
 
-#==========================rules==============================#
-all :  $(PRGM)
+# ==========================rules============================== #
+all : $(PRGM)
 
 $(PRGM) : $(OBJS)
-	@echo "${GREEN}$(MAKE_MSG)${WHITE}"\
+	@echo "${GREEN}$(MAKE_MSG)${WHITE}" \
 	&& $(CC) $(CFLAGS) $(TFLAGS) $(OBJS) -o $(PRGM)
 
 clean :
-	@echo "${YELLOW}$(CLN_MSG)${WHITE}"\
+	@echo "${YELLOW}$(CLN_MSG)${WHITE}" \
 	&& $(RM) $(OBJS)
 
 fclean : clean
-	@echo "${RED}$(FCLN_MSG)${WHITE}"\
+	@echo "${RED}$(FCLN_MSG)${WHITE}" \
 	&& $(RM) $(PRGM)
 
 re : fclean all
 
-.PHONY: all clean fclean re
-#=============================================================#
+asan : CFLAGS += $(ASAN_FLAGS)
+asan : $(PRGM)
+	@echo "${CYAN}$(ASAN_MSG)${WHITE}"
+
+.PHONY: all clean fclean re asan
+# ============================================================= #
