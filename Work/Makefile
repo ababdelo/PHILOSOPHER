@@ -41,6 +41,8 @@ TFLAGS = -lpthread
 
 CFLAGS = -Wall -Wextra -Werror
 
+ASAN_FLAGS = -fsanitize=address -g3
+
 SRCS = philo.c init.c utils.c timer.c checker.c
 
 OBJS = $(SRCS:.c=.o)
